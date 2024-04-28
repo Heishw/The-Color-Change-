@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Change Magic by HAMS 1</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 50px;
+    }
+    h1, p {
+        font-family: Arial, sans-serif;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    #color-description {
+        margin-top: 20px;
+        font-style: italic;
+        color: black; /* Initial font color */
+    }
+</style>
+</head>
+<body>
+    <h1>Color Change Magic by HAMS 1</h1>
+    <p>Web makers: Altonio Iseiah D. Mandocdoc, Katrina Whiteside, Riana Avelino</p>
+    <button id="color-button">Change Color</button>
+    <p id="color-description">Click the button to discover a new color!</p>
+
+    <script>
+        const colorButton = document.getElementById('color-button');
+        const colorDescription = document.getElementById('color-description');
+
+        const colors = [
+            { name: 'Red', description: 'Red is the color of fire and blood, so it is associated with energy, war, danger, strength, power, determination, as well as passion, desire, and love.' },
+            { name: 'Blue', description: 'Blue is the color of the sky and sea. It is often associated with depth and stability. It symbolizes trust, loyalty, wisdom, confidence, intelligence, faith, truth, and heaven.' },
+            { name: 'Green', description: 'Green is the color of nature. It symbolizes growth, harmony, freshness, and fertility. Green has strong emotional correspondence with safety.' },
+            { name: 'Yellow', description: 'Yellow is the color of sunshine. It represents joy, happiness, intellect, and energy. Yellow produces a warming effect, arouses cheerfulness, stimulates mental activity, and generates muscle energy.' },
+            { name: 'Purple', description: 'Purple combines the stability of blue and the energy of red. Purple is associated with royalty. It symbolizes power, nobility, luxury, and ambition. It conveys wealth and extravagance.' },
+            { name: 'Orange', description: 'Orange combines the energy of red and the happiness of yellow. It is associated with joy, sunshine, and the tropics. Orange represents enthusiasm, fascination, happiness, creativity, determination, attraction, success, encouragement, and stimulation.' },
+            { name: 'Pink', description: 'Pink represents compassion, nurturing, and love. It relates to unconditional love and understanding, and the giving and receiving of nurturing.' },
+            { name: 'White', description: 'White is associated with light, goodness, innocence, and purity. It is considered to be the color of perfection. White means safety, purity, and cleanliness.' },
+            { name: 'Black', description: 'Black is associated with power, elegance, formality, and mystery. It is a mysterious color that is typically associated with the unknown or the negative. It can also symbolize emptiness, being secretive, and depth.' },
+            { name: 'Cyan', description: 'Cyan is a light blue color. It is associated with tranquility, calmness, and relaxation. Cyan is often used to evoke a feeling of serenity and peacefulness.' },
+            { name: 'Magenta', description: 'Magenta is a purplish-red color. It is associated with creativity, imagination, and innovation. Magenta is often used to represent artistic expression and originality.' },
+            { name: 'Lime', description: 'Lime is a bright green color. It is associated with freshness, youth, and vitality. Lime is often used to symbolize energy and enthusiasm.' },
+            { name: 'Teal', description: 'Teal is a greenish-blue color. It is associated with sophistication, elegance, and refinement. Teal is often used to evoke a sense of calmness and balance.' },
+            { name: 'Indigo', description: 'Indigo is a deep blue color. It is associated with wisdom, intuition, and spiritual awareness. Indigo is often used to represent depth and mystery.' },
+            { name: 'Aquamarine', description: 'Aquamarine is a light blue-green color. It is associated with the ocean and is often considered a symbol of tranquility, purity, and relaxation.' },
+            { name: 'Turquoise', description: 'Turquoise is a mix of blue and green. It is associated with calmness, tranquility, and emotional balance. Turquoise also symbolizes communication and clarity of thought.' },
+            { name: 'Gold', description: 'Gold is a bright, metallic yellow color. It symbolizes wealth, prosperity, success, and achievement. Gold also represents luxury, quality, and prestige.' },
+            { name: 'Silver', description: 'Silver is a shiny, metallic gray color. It is associated with wealth, elegance, sophistication, and modernity. Silver also symbolizes clarity, purity, and reflection.' },
+            { name: 'Maroon', description: 'Maroon is a dark red color. It is associated with courage, strength, and vigor. Maroon can also symbolize control, passion, and determination.' },
+            { name: 'Navy', description: 'Navy is a dark blue color. It is associated with authority, stability, and conservatism. Navy is often used to convey professionalism and trustworthiness.' },
+            { name: 'Olive', description: 'Olive is a dark yellowish-green color. It is associated with peace, harmony, and growth. Olive also symbolizes endurance, wisdom, and fertility.' },
+            { name: 'Gray', description: 'Gray is a neutral color. It is associated with neutrality, balance, and calmness. Gray can also symbolize intelligence, maturity, and compromise.' },
+            { name: 'Brown', description: 'Brown is an earthy color. It is associated with stability, reliability, and comfort. Brown also symbolizes warmth, security, and resilience.' },
+            { name: 'Beige', description: 'Beige is a light brown color. It is associated with simplicity, warmth, and relaxation. Beige can also symbolize elegance, neutrality, and subtlety.' },
+            { name: 'Tan', description: 'Tan is a light brown color. It is associated with naturalness, warmth, and simplicity. Tan can also symbolize durability, reliability, and approachability.' },
+            { name: 'Ivory', description: 'Ivory is an off-white color. It is associated with purity, innocence, and elegance. Ivory can also symbolize luxury, sophistication, and exclusivity.' },
+            { name: 'Coral', description: 'Coral is a pinkish-orange color. It is associated with energy, warmth, and happiness. Coral can also symbolize friendship, creativity, and vitality.' },
+            { name: 'Salmon', description: 'Salmon is a pinkish-orange color. It is associated with femininity, romance, and affection. Salmon can also symbolize sensitivity, compassion, and optimism.' },
+            { name: 'Sky Blue', description: 'Sky Blue is a light blue color. It is associated with tranquility, serenity, and openness. Sky Blue can also symbolize freedom, inspiration, and imagination.' },
+            { name: 'Lavender', description: 'Lavender is a pale purple color. It is associated with relaxation, harmony, and spirituality. Lavender can also symbolize grace, elegance, and refinement.' },
+            // Add more colors and descriptions here...
+        ];
+
+        colorButton.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            const selectedColor = colors[randomIndex];
+            document.body.style.backgroundColor = selectedColor.name.toLowerCase();
+            if (isDarkColor(selectedColor.name.toLowerCase())) {
+                colorDescription.style.color = 'white';
+            } else {
+                colorDescription.style.color = 'black';
+            }
+            colorDescription.textContent = selectedColor.description;
+        });
+
+        function isDarkColor(color) {
+            const rgb = getRGB(color);
+            const brightness = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
+            return brightness < 128;
+        }
+
+        function getRGB(color) {
+            const div = document.createElement('div');
+            div.style.backgroundColor = color;
+            document.body.appendChild(div);
+            const computedColor = getComputedStyle(div).backgroundColor;
+            document.body.removeChild(div);
+            return rgbToArray(computedColor);
+        }
+
+        function rgbToArray(rgb) {
+            return rgb.match(/\d+/g).map(Number);
+        }
+    </script>
+</body>
+</html>
